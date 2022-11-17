@@ -22,12 +22,13 @@ body {
 .color-red {
     color: var(--red-main);
 }
+
 .bg-red {
     background: var(--red-main);
 }
 
 .btn-navbar {
-    padding: 7px 0;
+    padding: 10px 0;
     font-weight: 700;
     font-size: 14px;
     line-height: 17px;
@@ -61,4 +62,22 @@ body {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.btn-user,
+.btn-user:hover {
+    padding: 7px 5px;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.badge-position {
+    right: -5px;
+}
+
+.icon-size {
+    width: 30px;
+    align-self: center;
+    justify-self: center;
 }

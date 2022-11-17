@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Button, FloatingLabel, Form, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ show, setShow, setShowRegister }) => {
   const dataUser = [];
+  const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const changeModal = () => {
@@ -55,7 +57,16 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
     let parsed = JSON.stringify(loggedIn);
     localStorage.setItem("LOGIN_STATUS", parsed);
     handleClose();
+    handlePage(loggedIn[0].role);
   }
+
+  const handlePage = (role) => {
+    if (role === "admin") {
+      return navigate("/admin");
+    } else {
+      return navigate("/");
+    }
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>

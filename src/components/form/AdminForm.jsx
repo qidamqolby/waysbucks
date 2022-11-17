@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 
 const AdminForm = ({ formEdit }) => {
   const role = formEdit.role;
@@ -24,6 +24,7 @@ const AdminForm = ({ formEdit }) => {
     e.preventDefault();
     getData();
     saveData();
+    document.getElementById("addForm").reset();
   };
 
   const getData = () => {
@@ -49,50 +50,58 @@ const AdminForm = ({ formEdit }) => {
     localStorage.setItem(keyDataInput, parsed);
   };
   return (
-    <Form className="p-5 col-6 mx-5" onSubmit={handleOnSubmit}>
-      <h2 className="text-left fw-bold color-red mb-5">{role}</h2>
-      <Form.Group className="my-3">
-        <FloatingLabel label={"Name " + role}>
-          <Form.Control
-            type="text"
-            name="itemname"
-            onChange={handleOnChange}
-            required
-            placeholder={"Name " + role}
-          />
-        </FloatingLabel>
-      </Form.Group>
-      <Form.Group className="my-3">
-        <FloatingLabel label={"Price " + role}>
-          <Form.Control
-            type="number"
-            name="itemprice"
-            onChange={handleOnChange}
-            required
-            placeholder={"Price " + role}
-          />
-        </FloatingLabel>
-      </Form.Group>
-      <Form.Group className="my-3">
-        <FloatingLabel label={"Image " + role}>
-          <Form.Control
-            type="text"
-            name="itemimage"
-            onChange={handleOnChange}
-            required
-            placeholder={"Image " + role}
-          />
-        </FloatingLabel>
-      </Form.Group>
-      <Form.Group className="my-3">
-        <Button
-          className="btn btn-danger btn-main btn-form col-12"
-          type="submit"
-        >
-          Add {role}
-        </Button>
-      </Form.Group>
-    </Form>
+    <Row className="mx-5 gap-3">
+      <Col className="col-6">
+        <Form className="p-5" onSubmit={handleOnSubmit} id="addForm">
+          <h2 className="text-left fw-bold color-red mb-5">{role}</h2>
+          <Form.Group className="my-3">
+            <FloatingLabel label={"Name " + role}>
+              <Form.Control
+                type="text"
+                name="itemname"
+                onChange={handleOnChange}
+                required
+                placeholder={"Name " + role}
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="my-3">
+            <FloatingLabel label={"Price " + role}>
+              <Form.Control
+                type="number"
+                name="itemprice"
+                onChange={handleOnChange}
+                required
+                placeholder={"Price " + role}
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="my-3">
+            <FloatingLabel label={"Image " + role}>
+              <Form.Control
+                type="text"
+                name="itemimage"
+                onChange={handleOnChange}
+                required
+                placeholder={"Image " + role}
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className="my-3">
+            <Button
+              className="btn btn-danger btn-main btn-form col-12"
+              type="submit"
+            >
+              Add {role}
+            </Button>
+          </Form.Group>
+        </Form>
+      </Col>
+
+      <Col className="col-4 product-content">
+        <img src={item.itemimage} className="image-product rounded-4" alt="" />
+      </Col>
+    </Row>
   );
 };
 

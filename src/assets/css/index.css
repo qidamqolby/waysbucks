@@ -1,83 +1,87 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
 
 :root {
-    --red-main: #bd0707;
-    --red-variant-1: #f13f3f;
-    --red-variant-2: #f6dada;
-    --red-variant-3: #e0c8c8;
-    --red-variant-4: #974a4a;
-    --white: #fff;
-    --black: #000;
+  --red-main: #bd0707;
+  --red-variant-1: #f13f3f;
+  --red-variant-2: #f6dada;
+  --red-variant-3: #e0c8c8;
+  --red-variant-4: #974a4a;
+  --white: #fff;
+  --black: #000;
 }
 
 *::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 body {
-    background: "#fffbfb";
-    font-family: "Montserrat", sans-serif;
+  background: "#fffbfb";
+  font-family: "Montserrat", sans-serif;
 }
 
 .color-red {
-    color: var(--red-main);
+  color: var(--red-main);
 }
 
 .bg-red {
-    background: var(--red-main);
+  background: var(--red-main);
 }
 
 .btn-navbar {
-    padding: 10px 0;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 17px;
+  padding: 10px 0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .btn-form {
-    padding: 13px 0;
+  padding: 13px 0;
 
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 25px;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
 }
 
 .btn-white {
-    outline: var(--red-main);
+  outline: var(--red-main);
 }
 
 .btn-white:hover {
-    background: var(--red-main);
+  background: var(--red-main);
 }
 
 .btn-main {
-    background: var(--red-main);
+  background: var(--red-main);
 }
 
 .btn-main:hover {
-    background: var(--white);
-    color: var(--red-main);
-    outline: var(--red-main);
+  background: var(--white);
+  color: var(--red-main);
+  outline: var(--red-main);
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn-user,
 .btn-user:hover {
-    padding: 7px 5px;
-    background: none;
-    outline: none;
-    border: none;
+  padding: 7px 5px;
+  background: none;
+  outline: none;
+  border: none;
 }
 
 .badge-position {
-    right: -5px;
+  right: -5px;
 }
 
 .icon-size {
-    width: 30px;
-    align-self: center;
-    justify-self: center;
+  width: 30px;
+  align-self: center;
+  justify-self: center;
+}
+
+.visibility-hidden {
+  visibility: hidden;
 }

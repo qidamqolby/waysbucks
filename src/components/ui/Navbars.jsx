@@ -69,49 +69,30 @@ const Navbars = () => {
               </Nav>
             ) : (
               <Nav>
-                <Dropdown className="d-flex gap-4 align-items-center">
-                  <Button
-                    className="position-relative btn-user"
-                    variant="light"
-                  >
-                    <img
-                      src={cartIcon}
-                      onClick={() => navigate("/")}
-                      alt=""
-                      className="icon-size"
-                    />
+                {getLogin[0].role === "admin" ? (
+                  <Dropdown className="d-flex gap-4 align-items-center">
+                    <Button
+                      className="position-relative btn-user visibility-hidden"
+                      variant="light"
+                    >
+                      <img
+                        src={cartIcon}
+                        onClick={() => navigate("/")}
+                        alt=""
+                        className="icon-size"
+                      />
 
-                    <Badge className="position-absolute badge-position rounded-pill bg-danger">
-                      1
-                    </Badge>
-                  </Button>
-                  <Dropdown.Toggle variant="light" className="btn-user">
-                    <img src={userIcon} alt="" className="icon-size" />
-                  </Dropdown.Toggle>
-                  {getLogin[0].role === "user" ? (
+                      <Badge className="position-absolute badge-position rounded-pill bg-danger">
+                        1
+                      </Badge>
+                    </Button>
+                    <Dropdown.Toggle variant="light" className="btn-user">
+                      <img src={userIcon} alt="" className="icon-size" />
+                    </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item onClick={() => navigate("/profile")}>
-                        <img src={userIcon} alt="" className="icon-size me-3" />
-                        Profile
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
                       <Dropdown.Item
-                        onClick={() => {
-                          Logout();
-                          navigate("/");
-                        }}
+                        onClick={() => navigate("/admin/add-product")}
                       >
-                        <img
-                          src={logoutIcon}
-                          alt=""
-                          className="icon-size me-3"
-                        />
-                        Logout
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  ) : (
-                    <Dropdown.Menu>
-                      <Dropdown.Item onClick={() => navigate("/add-product")}>
                         <img
                           src={productIcon}
                           alt=""
@@ -119,7 +100,9 @@ const Navbars = () => {
                         />
                         Add Product
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={() => navigate("/add-topping")}>
+                      <Dropdown.Item
+                        onClick={() => navigate("/admin/add-topping")}
+                      >
                         <img
                           src={toppingIcon}
                           alt=""
@@ -142,8 +125,49 @@ const Navbars = () => {
                         Logout
                       </Dropdown.Item>
                     </Dropdown.Menu>
-                  )}
-                </Dropdown>
+                  </Dropdown>
+                ) : (
+                  <Dropdown className="position-relative d-flex gap-4 align-items-center">
+                    <Button
+                      className="position-relative btn-user"
+                      variant="light"
+                    >
+                      <img
+                        src={cartIcon}
+                        onClick={() => navigate("/")}
+                        alt=""
+                        className="icon-size"
+                      />
+
+                      <Badge className="position-absolute badge-position rounded-pill bg-danger">
+                        1
+                      </Badge>
+                    </Button>
+                    <Dropdown.Toggle variant="light" className="btn-user">
+                      <img src={userIcon} alt="" className="icon-size" />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => navigate("/profile")}>
+                        <img src={userIcon} alt="" className="icon-size me-3" />
+                        Profile
+                      </Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item
+                        onClick={() => {
+                          Logout();
+                          navigate("/");
+                        }}
+                      >
+                        <img
+                          src={logoutIcon}
+                          alt=""
+                          className="icon-size me-3"
+                        />
+                        Logout
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                )}
               </Nav>
             )}
           </Navbar.Collapse>

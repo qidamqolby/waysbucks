@@ -1,14 +1,17 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 //Pages
-import LoginForm from "./components/form/LoginForm";
+import Navbars from "./components/ui/Navbars";
 function App() {
-    return (
-        <BrowserRouter>
-            <LoginForm />
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Navbars />
+      <Routes>
+        <Route />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

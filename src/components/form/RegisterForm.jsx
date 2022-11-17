@@ -1,20 +1,44 @@
 import React, { useState } from "react";
 import { Button, FloatingLabel, Form, Modal } from "react-bootstrap";
 
-const LoginForm = ({ show, setShow, setShowRegister }) => {
+const RegisterForm = ({ show, setShow, setShowLogin }) => {
   const dataUser = [];
 
   const handleClose = () => setShow(false);
   const changeModal = () => {
     handleClose();
-    setShowRegister(true);
+    setShowLogin(true);
   };
 
-  const [userLogin, setUserLogin] = useState({
+  const [userRegister, setUserRegister] = useState({
+    id: 0,
     name: "",
     email: "",
     password: "",
+    role: "user",
   });
+
+  function handleOnChange(event) {
+    setUserRegister({
+      ...userRegister,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleOnSubmit(event) {
+    event.preventDefault();
+    getUser();
+
+    let loggedIn = dataUser.filter(
+      (element) => element.email === userRegister.email
+    );
+    if (loggedIn.length !== 0) {
+      return alert("email is registered");
+    } else {
+      createUser();
+      changeModal();
+    }
+  }
 
   const getUser = () => {
     if (typeof Storage === "undefined") {
@@ -31,47 +55,39 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
     }
   };
 
-  function handleOnChange(event) {
-    setUserLogin({
-      ...userLogin,
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  function handleOnSubmit(event) {
-    event.preventDefault();
-    getUser();
-    let loggedIn = dataUser.filter(
-      (element) => element.email === userLogin.email
-    );
-    if (loggedIn.length === 0) {
-      return alert("email not registered");
-    }
-
-    if (loggedIn[0].password !== userLogin.password) {
-      return alert("wrong password");
-    }
-
-    let parsed = JSON.stringify(loggedIn);
-    localStorage.setItem("LOGIN_STATUS", parsed);
-    handleClose();
-  }
+  const createUser = () => {
+    userRegister.id = dataUser.length;
+    dataUser.push(userRegister);
+    const parsed = JSON.stringify(dataUser);
+    localStorage.setItem("DATA_USER", parsed);
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Form className="p-5" onSubmit={handleOnSubmit}>
-        <h2 className="text-left fw-bold color-red mb-4">Login</h2>
+        <h2 className="text-left fw-bold color-red mb-4">Register</h2>
         <Form.Group className="my-3">
+          <FloatingLabel label="Your name">
+            <Form.Control
+              type="text"
+              placeholder="John Doe"
+              name="name"
+              onChange={handleOnChange}
+              required
+            />
+          </FloatingLabel>
+        </Form.Group>
+        <Form.Group className="mb-3">
           <FloatingLabel label="Email address">
             <Form.Control
               type="email"
               placeholder="yourname@example.com"
               name="email"
               onChange={handleOnChange}
+              required
             />
           </FloatingLabel>
         </Form.Group>
-
         <Form.Group className="mb-3">
           <FloatingLabel label="Password">
             <Form.Control
@@ -79,6 +95,7 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
               placeholder="Password"
               name="password"
               onChange={handleOnChange}
+              required
             />
           </FloatingLabel>
         </Form.Group>
@@ -87,12 +104,12 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
             className="btn btn-danger btn-main btn-form col-12"
             type="submit"
           >
-            Login
+            Register
           </Button>
         </Form.Group>
         <Form.Group>
           <p className="text-center my-3">
-            Don't have an account? Click{" "}
+            Already have an account ? Click{" "}
             <span className="fw-bold cursor-pointer" onClick={changeModal}>
               Here
             </span>
@@ -103,4 +120,4 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

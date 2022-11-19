@@ -92,12 +92,34 @@ body {
 }
 
 .image-product {
-  object-fit: cover;
-  height: 100%;
   width: 100%;
+  height: 400px;
+  object-fit: cover;
 }
 
 .productlist-image {
   width: 100%;
   height: 300px;
+  object-fit: cover;
+}
+
+.toppinglist-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.fs-7 {
+  font-size: 12px;
+}
+
+.toppinglist-card {
+  border: none;
+}
+
+.checked {
+  position: absolute;
+  top: 0;
+  right: 40px;
+  width: 20px;
 }

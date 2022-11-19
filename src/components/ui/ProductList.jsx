@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const ProductList = () => {
-  // const navigate = useNavigate();
+import LoginForm from "../form/LoginForm";
+import RegisterForm from "../form/RegisterForm";
+
+const ProductList = ({ getLogin }) => {
+  const navigate = useNavigate();
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+
   const Products = [];
   const getProducts = () => {
     if (typeof Storage === "undefined") {
@@ -27,14 +33,20 @@ const ProductList = () => {
     }
   };
   getProducts();
-
   return (
     <Container className="my-5">
       <h2 className="fw-bold color-red">Let's Order</h2>
       <Row className="my-3">
         {Products.map((item, index) => (
-          <Col key={index} className="col-12 col-md-3">
-            <Card>
+          <Col key={index} className="col-12 col-md-3 my-3">
+            <Card
+              className="cursor-pointer"
+              onClick={() =>
+                !!getLogin === false
+                  ? setShowLogin(true)
+                  : navigate(`/product/${item.itemid}`)
+              }
+            >
               <Card.Img src={item.itemimage} className="productlist-image" />
               <Card.Body>
                 <Card.Title className="fs-6">{item.itemname}</Card.Title>
@@ -44,6 +56,16 @@ const ProductList = () => {
           </Col>
         ))}
       </Row>
+      <LoginForm
+        show={showLogin}
+        setShow={setShowLogin}
+        setShowRegister={setShowRegister}
+      />
+      <RegisterForm
+        show={showRegister}
+        setShow={setShowRegister}
+        setShowRegister={setShowLogin}
+      />
     </Container>
   );
 };

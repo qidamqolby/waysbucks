@@ -3,7 +3,6 @@ import { Button, FloatingLabel, Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({ show, setShow, setShowRegister }) => {
-  const dataUser = [];
   const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
@@ -18,6 +17,7 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
     password: "",
   });
 
+  const dataUser = [];
   const getUser = () => {
     if (typeof Storage === "undefined") {
       alert("cant store user");

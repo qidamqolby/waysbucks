@@ -27,12 +27,10 @@ const Navbars = () => {
 
   const localData = localStorage.getItem("LOGIN_STATUS");
   const data = JSON.parse(localData);
-  let getLogin = [...data];
+  let getLogin = data;
 
   const Logout = () => {
-    getLogin.pop();
-    const parsed = JSON.stringify(getLogin);
-    localStorage.setItem("LOGIN_STATUS", parsed);
+    localStorage.removeItem("LOGIN_STATUS");
   };
 
   return (
@@ -50,7 +48,7 @@ const Navbars = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll" className="justify-content-end">
-            {getLogin.length === 0 ? (
+            {!!getLogin === false ? (
               <Nav className="gap-2 col-3">
                 <Button
                   variant="outline-danger"

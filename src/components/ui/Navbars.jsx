@@ -29,6 +29,20 @@ const Navbars = () => {
   const data = JSON.parse(localData);
   let getLogin = data;
 
+  let dataCart = [];
+  const getCartData = () => {
+    let data;
+    if (!!getLogin !== false) {
+      data = JSON.parse(localStorage.getItem(`DATA_CART_${getLogin[0].id}`));
+    }
+
+    if (!!data !== false) {
+      for (let i = 0; i < data.length; i++) {
+        dataCart.push(data[i]);
+      }
+    }
+  };
+  getCartData();
   const Logout = () => {
     localStorage.removeItem("LOGIN_STATUS");
   };
@@ -132,13 +146,13 @@ const Navbars = () => {
                     >
                       <img
                         src={cartIcon}
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/cart")}
                         alt=""
                         className="icon-size"
                       />
 
                       <Badge className="position-absolute badge-position rounded-pill bg-danger">
-                        1
+                        {dataCart.length}
                       </Badge>
                     </Button>
                     <Dropdown.Toggle variant="light" className="btn-user">

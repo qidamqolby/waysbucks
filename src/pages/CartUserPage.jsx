@@ -40,23 +40,20 @@ const CartUserPage = () => {
     }
   };
 
-  const dataCart = [];
-  const getCartUser = () => {
-    if (typeof Storage === "undefined") {
-      alert("cant store user");
+  let dataCart = [];
+  const getCartData = () => {
+    let data;
+    if (!!getLogin !== false) {
+      data = JSON.parse(localStorage.getItem(`DATA_CART_${getLogin[0].id}`));
     }
 
-    const localData = localStorage.getItem(`DATA_CART_${getLogin[0].id}`);
-    let data = JSON.parse(localData);
-
-    if (data !== null) {
+    if (!!data !== false) {
       for (let i = 0; i < data.length; i++) {
         dataCart.push(data[i]);
       }
     }
   };
-
-  getCartUser();
+  getCartData();
   getProducts();
   getToppings();
 

@@ -123,3 +123,17 @@ body {
   right: 40px;
   width: 20px;
 }
+
+.hr-cart {
+  border: 1px solid var(--red-main);
+}
+
+.cartlist-image {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.delete-cart {
+  font-size: 12px;
+}

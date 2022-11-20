@@ -76,35 +76,28 @@ const ProductPage = () => {
       alert("cant store user");
     }
 
-    const localData = localStorage.getItem("DATA_CART");
+    const localData = localStorage.getItem(`DATA_CART_${getLogin[0].id}`);
     let data = JSON.parse(localData);
 
     if (data !== null) {
       for (let i = 0; i < data.length; i++) {
-        if (data[i].userid === getLogin[0].id) {
-          dataCart.push(data[i]);
-        }
+        dataCart.push(data[i]);
       }
     }
   };
 
   const saveCartUser = () => {
-    let currentCart = [];
     let currentProduct = {
+      cartid: +new Date(),
       itemid: Product[0].itemid,
       topping: toppingCheck,
       total: Product[0].itemprice + toppingPrice,
-    };
-    currentCart.push(currentProduct);
-
-    let currentCartUser = {
-      userid: getLogin[0].id,
-      cart: currentCart,
+      isPaid: false,
     };
 
-    dataCart.push(currentCartUser);
+    dataCart.push(currentProduct);
     const parsed = JSON.stringify(dataCart);
-    localStorage.setItem("DATA_CART", parsed);
+    localStorage.setItem(`DATA_CART_${getLogin[0].id}`, parsed);
   };
 
   const handleOnSubmit = () => {

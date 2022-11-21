@@ -71,10 +71,10 @@ const CartUserPage = () => {
   };
 
   const getPaid = () => {
-    dataCart.forEach((element) => {
+    let localData = dataCart.forEach((element) => {
       element.isPaid = true;
     });
-    const parsed = JSON.stringify(dataCart);
+    const parsed = JSON.stringify(localData);
     localStorage.setItem(`DATA_CART_${getLogin[0].id}`, parsed);
     navigate("/cart");
   };

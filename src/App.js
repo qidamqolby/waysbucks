@@ -8,6 +8,7 @@ import AdminPage from "./pages/AdminPage";
 import AdminControlPage from "./pages/AdminControlPage";
 import ProductPage from "./pages/ProductPage";
 import CartUserPage from "./pages/CartUserPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/cart" element={<CartUserPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/add-product" element={<AdminControlPage />} />

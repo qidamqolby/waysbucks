@@ -3,9 +3,7 @@ import Header from "../moduls/header";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import { API } from "../config/api";
-import dateFormat from "dateformat";
 import { Button } from "react-bootstrap";
-import { useMutation } from "react-query";
 
 export default function Income() {
   const navigate = useNavigate();

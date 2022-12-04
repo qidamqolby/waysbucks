@@ -1,27 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { UserContextProvider } from './context/UserContext';
-import App from './App';
-import { QueryClient, QueryClientProvider } from "react-query";
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import App from './components/App'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './components/styles/marginpadding.css'
+import './components/App.css'
+import './index.css'
+import { UserContextProvider } from './components/context/userContext'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
-import Favicon from "./assets/Logo.svg"
-const favicon = document.getElementById('idFavicon');
-favicon.setAttribute('href', Favicon);
+const newQueryClient = new QueryClient();
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-const client = new QueryClient();
-
-
+const root = ReactDOM.createRoot(document.getElementById('root')) 
 root.render(
   <React.StrictMode>
     <UserContextProvider>
-      {/* client */}
-      <QueryClientProvider client={client}>
+      <QueryClientProvider client={newQueryClient}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </QueryClientProvider>
     </UserContextProvider>
   </React.StrictMode>
-);
+)

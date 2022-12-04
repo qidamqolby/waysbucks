@@ -7,7 +7,7 @@ import { API } from "../../config/api";
 import { useState } from "react";
 
 // components
-import Dropdown from "./dropdown/Dropdown";
+import Dropdown from "./dropdown/dropdown";
 import ModalAuth from "../modal/ModalAuth";
 
 // files

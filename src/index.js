@@ -1,25 +1,32 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './components/App'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './components/styles/marginpadding.css'
-import './components/App.css'
-import './index.css'
-import { UserContextProvider } from './components/context/userContext'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import React from "react"
+import ReactDOM from "react-dom"
+import { BrowserRouter as Router } from "react-router-dom"
 
-const newQueryClient = new QueryClient();
+import "./index.css"
+import App from "./App"
+import reportWebVitals from "./reportWebVitals"
 
-const root = ReactDOM.createRoot(document.getElementById('root')) 
-root.render(
+import "bootstrap/dist/css/bootstrap.min.css"
+import { UserContextProvider } from "./context/userContext"
+
+import { QueryClient, QueryClientProvider } from "react-query"
+
+const client = new QueryClient()
+
+ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
-      <QueryClientProvider client={newQueryClient}>
-        <BrowserRouter>
+      <QueryClientProvider client={client}>
+        <Router>
           <App />
-        </BrowserRouter>
+        </Router>
       </QueryClientProvider>
     </UserContextProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 )
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()

@@ -1,0 +1,30 @@
+.IconStatus {
+  position: relative;
+  left: 45%;
+}
+
+.Wraple {
+  width: 210px;
+  display: flex;
+  text-align: center;
+}
+
+.IncomeColor {
+  color: #061e99;
+}
+
+.SWaiting {
+  color: #ff9900;
+}
+
+.SSucces {
+  color: #78a85a;
+}
+
+.SCancle {
+  color: #e83939;
+}
+
+.SOtw {
+  color: #00d1ff;
+}

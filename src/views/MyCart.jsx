@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -7,73 +7,73 @@ import {
   Image,
   Form,
   Button,
-} from "react-bootstrap"
-import { useMutation, useQuery } from "react-query"
-import { useNavigate } from "react-router-dom"
-import AttachImg from "../component/image/AttacTransaction.png"
-import Bin from "../component/image/recyclebin.png"
-import { API } from "../config/api"
-import { UserContext } from "../context/userContext"
+} from "react-bootstrap";
+import { useMutation, useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+import AttachImg from "../component/image/AttacTransaction.png";
+import Bin from "../component/image/recyclebin.png";
+import { API } from "../config/api";
+import { UserContext } from "../context/userContext";
 
 const MyCart = () => {
-  const navigate = useNavigate()
-  const [state] = useContext(UserContext)
-  const [checkswitch, setCheckSwitch] = useState(false)
+  const navigate = useNavigate();
+  const [state] = useContext(UserContext);
+  const [checkswitch, setCheckSwitch] = useState(false);
 
   const { data: order, refetch } = useQuery("ordersCache", async () => {
     if (state.isLogin === true) {
-      const response = await API.get("/orders-id")
-      return response.data.data
+      const response = await API.get("/orders-id");
+      return response.data.data;
     }
-  })
+  });
 
   const formatIDR = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,
-  })
+  });
 
   let handleDelete = async (id) => {
-    await API.delete(`/order/` + id)
-    refetch()
-  }
+    await API.delete(`/order/` + id);
+    refetch();
+  };
 
-  let Totals = 0
-  let Qty = 0
+  let Totals = 0;
+  let Qty = 0;
 
   order?.map((e) => {
-    Totals += e.total
-    Qty += e.qty
-  })
+    Totals += e.total;
+    Qty += e.qty;
+  });
 
   const { data: user } = useQuery("userssCache", async () => {
     if (state.isLogin === true) {
-      const response = await API.get("/user")
-      return response.data.data
+      const response = await API.get("/user");
+      return response.data.data;
     }
-  })
+  });
   // useEffect(() => {}, [])
   const [form, setForm] = useState({
     fullname: "",
     phone: "",
     address: "",
-  })
+  });
 
   const handleSubmit = useMutation(async (e) => {
     const config = {
       headers: {
         "Content-type": "application/json",
       },
-    }
+    };
 
     if (form.fullname != "") {
-      user.fullname = form.fullname
+      user.fullname = form.fullname;
     }
     if (form.phone != "") {
-      user.phone = form.phone
+      user.phone = form.phone;
     }
     if (form.address != "") {
-      user.address = form.address
+      user.address = form.address;
     }
     const data = {
       ID: order[0].transaction_id,
@@ -83,51 +83,51 @@ const MyCart = () => {
       UserID: user.id,
       Total: Totals,
       Status: "pending",
-    }
-    refetch()
-    const response = await API.patch("/transaction", data, config)
-    console.log("ini data token", response)
-    const token = response.data.data.token
+    };
+    refetch();
+    const response = await API.patch("/transaction", data, config);
+    console.log("ini data token", response);
+    const token = response.data.data.token;
 
     window.snap.pay(token, {
       onSuccess: function (result) {
         /* You may add your own implementation here */
-        console.log(result)
-        navigate("/profile")
+        console.log(result);
+        navigate("/profile");
       },
       onPending: function (result) {
         /* You may add your own implementation here */
-        console.log(result)
-        navigate("/profile")
+        console.log(result);
+        navigate("/profile");
       },
       onError: function (result) {
         /* You may add your own implementation here */
-        console.log(result)
+        console.log(result);
       },
       onClose: function () {
         /* You may add your own implementation here */
-        alert("you closed the popup without finishing the payment")
+        alert("you closed the popup without finishing the payment");
       },
-    })
-  })
+    });
+  });
 
   useEffect(() => {
     //change this to the script source you want to load, for example this is snap.js sandbox env
-    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js"
+    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
     //change this according to your client-key
-    const myMidtransClientKey = "Client key here ..."
+    const myMidtransClientKey = process.env.REACT_APP_MIDTRANS_CLIENT_KEY;
 
-    let scriptTag = document.createElement("script")
-    scriptTag.src = midtransScriptUrl
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransScriptUrl;
     // optional if you want to set script attribute
     // for example snap.js have data-client-key attribute
-    scriptTag.setAttribute("data-client-key", myMidtransClientKey)
+    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
 
-    document.body.appendChild(scriptTag)
+    document.body.appendChild(scriptTag);
     return () => {
-      document.body.removeChild(scriptTag)
-    }
-  }, [])
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
   return (
     <>
       <Container className="mt-3">
@@ -156,7 +156,7 @@ const MyCart = () => {
                         <p className="m-0" style={{ color: "#bd0707" }}>
                           Topping:{" "}
                           {item.topping.map((topping, index) => {
-                            return <span key={index}>{topping.title},</span>
+                            return <span key={index}>{topping.title},</span>;
                           })}
                         </p>
                       </div>
@@ -176,7 +176,7 @@ const MyCart = () => {
                         </div>
                       </div>
                     </Stack>
-                  )
+                  );
                 })}
               </>
             ) : (
@@ -212,7 +212,7 @@ const MyCart = () => {
                   className="form-check-input mb-4"
                   type="checkbox"
                   onChange={() => {
-                    setCheckSwitch(!checkswitch)
+                    setCheckSwitch(!checkswitch);
                   }}
                   role="switch"
                   id="flexSwitchCheckChecked"
@@ -294,7 +294,7 @@ const MyCart = () => {
         </Row>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default MyCart
+export default MyCart;

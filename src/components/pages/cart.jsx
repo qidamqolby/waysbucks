@@ -19,8 +19,6 @@ function Cart() {
     return item.transaction_id === null;
   });
 
-  // console.log(dataCarts)
-
   let resultTotal = dataCarts?.reduce((addition, b) => {
     return addition + b.sub_amount;
   }, 0);

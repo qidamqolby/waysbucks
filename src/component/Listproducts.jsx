@@ -1,30 +1,30 @@
-import React, { useState, useContext } from "react"
-import { Container, Card, Row, Col } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
-import { API } from "../config/api"
-import Login from "./auth/Login"
-import Register from "./auth/Register"
-import { UserContext } from "../context/userContext"
-import { useQuery } from "react-query"
+import React, { useState, useContext } from "react";
+import { Container, Card, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { API } from "../config/api";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import { UserContext } from "../context/userContext";
+import { useQuery } from "react-query";
 
 const Listproducts = () => {
-  const [showLogin, setShowLogin] = useState(false)
-  const [showRegister, setShowRegister] = useState(false)
-  const [state] = useContext(UserContext)
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const [state] = useContext(UserContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formatIDR = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,
-  })
+  });
 
   const { data: products } = useQuery("productssCache", async () => {
-    const response = await API.get("/products")
+    const response = await API.get("/products");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
   return (
     <>
@@ -45,7 +45,7 @@ const Listproducts = () => {
                   onClick={() => {
                     state?.isLogin === false
                       ? setShowLogin(true)
-                      : navigate(`/detail-product/${product.id}`)
+                      : navigate(`/detail-product/${product.id}`);
                   }}
                 />
 
@@ -71,7 +71,7 @@ const Listproducts = () => {
       <Login
         show={showLogin}
         hide={() => {
-          setShowLogin(false)
+          setShowLogin(false);
         }}
         setShowLogin={setShowLogin}
         setShowRegister={setShowRegister}
@@ -83,7 +83,7 @@ const Listproducts = () => {
         setShowLogin={setShowLogin}
       />
     </>
-  )
-}
+  );
+};
 
-export default Listproducts
+export default Listproducts;

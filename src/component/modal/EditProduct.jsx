@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { Modal, Form, Button } from "react-bootstrap"
-import { API } from "../../config/api"
-import { useMutation } from "react-query"
+import React, { useState } from "react";
+import { Modal, Form, Button } from "react-bootstrap";
+import { API } from "../../config/api";
+import { useMutation } from "react-query";
 
 const EditProduct = ({ show, hide, setShowUpdate, id, refetch }) => {
   const [form, setForm] = useState({
@@ -9,39 +9,39 @@ const EditProduct = ({ show, hide, setShowUpdate, id, refetch }) => {
     price: 0,
     image: "",
     qty: 0,
-  })
+  });
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
 
       const config = {
         headers: {
           "Content-type": "multipart/form-data",
         },
-      }
+      };
 
-      const formData = new FormData()
-      formData.set("image", form.image[0])
-      formData.set("title", form.title)
-      formData.set("price", form.price)
-      formData.set("qty", form.qty)
+      const formData = new FormData();
+      formData.set("image", form.image[0]);
+      formData.set("title", form.title);
+      formData.set("price", form.price);
+      formData.set("qty", form.qty);
 
-      const res = await API.patch("/product/" + id, formData, config)
-      refetch()
-      setShowUpdate(false)
+      const res = await API.patch("/product/" + id, formData, config);
+      refetch();
+      setShowUpdate(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  })
+  });
   return (
     <>
       <Modal show={show} onHide={hide} centered>
@@ -99,7 +99,7 @@ const EditProduct = ({ show, hide, setShowUpdate, id, refetch }) => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default EditProduct
+export default EditProduct;

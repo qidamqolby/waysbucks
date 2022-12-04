@@ -1,44 +1,44 @@
-import React from "react"
-import { Container, Row, Table, Button, Image, Stack } from "react-bootstrap"
-import SuccessImg from "../component/image/icons/success.png"
-import CancelImg from "../component/image/icons/cancel.png"
-import { useQuery } from "react-query"
-import { API } from "../config/api"
-import styles from "./Transaction.module.css"
+import React from "react";
+import { Container, Row, Table, Button, Image, Stack } from "react-bootstrap";
+import SuccessImg from "../component/image/icons/success.png";
+import CancelImg from "../component/image/icons/cancel.png";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import styles from "./Transaction.module.css";
 
 function IncomePage() {
   const formatIDR = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,
-  })
+  });
   let { data: trans, refetch } = useQuery("transCache", async () => {
-    const response = await API.get("/transactions")
+    const response = await API.get("/transactions");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
   const handleSuccess = async (id) => {
     const form = {
       status: "success",
       id: id,
-    }
-    const body = JSON.stringify(form)
+    };
+    const body = JSON.stringify(form);
 
-    await API.patch("/transUpdate/" + id, body)
-    refetch()
-  }
+    await API.patch("/transUpdate/" + id, body);
+    refetch();
+  };
 
   const handleCancel = async (id) => {
     const form = {
       status: "cancel",
       id: id,
-    }
-    const body = JSON.stringify(form)
+    };
+    const body = JSON.stringify(form);
 
-    await API.patch("/transUpdate/" + id, body)
-    refetch()
-  }
+    await API.patch("/transUpdate/" + id, body);
+    refetch();
+  };
 
   return (
     <>
@@ -102,7 +102,7 @@ function IncomePage() {
                             <Button
                               className="btn-danger"
                               onClick={() => {
-                                handleCancel(e?.id)
+                                handleCancel(e?.id);
                               }}
                             >
                               Cancel
@@ -110,7 +110,7 @@ function IncomePage() {
                             <Button
                               className="btn-success"
                               onClick={() => {
-                                handleSuccess(e?.id)
+                                handleSuccess(e?.id);
                               }}
                             >
                               Approve
@@ -132,14 +132,14 @@ function IncomePage() {
                       </Stack>
                     </td>
                   </tr>
-                )
+                );
               })}
             </tbody>
           </Table>
         </Row>
       </Container>
     </>
-  )
+  );
 }
 
-export default IncomePage
+export default IncomePage;

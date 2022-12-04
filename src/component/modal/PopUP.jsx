@@ -1,5 +1,5 @@
-import React from "react"
-import Modal from "react-bootstrap/Modal"
+import React from "react";
+import Modal from "react-bootstrap/Modal";
 
 function ModalPopUp({ show, onHide }) {
   return (
@@ -16,7 +16,7 @@ function ModalPopUp({ show, onHide }) {
         </h4>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default ModalPopUp
+export default ModalPopUp;

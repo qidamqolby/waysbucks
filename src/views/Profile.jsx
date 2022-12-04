@@ -1,21 +1,21 @@
-import React, { useContext, useState } from "react"
-import { Container, Row, Col, Card, Button } from "react-bootstrap"
-import { useQuery } from "react-query"
-import Transaction from "../component/HistoryTrans"
-import { UserContext } from "../context/userContext"
-import { API } from "../config/api"
-import ModalProfile from "../component/modal/ModalProfile"
-import Foto from "../component/image/images.jpg"
+import React, { useContext, useState } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useQuery } from "react-query";
+import Transaction from "../component/HistoryTrans";
+import { UserContext } from "../context/userContext";
+import { API } from "../config/api";
+import ModalProfile from "../component/modal/ModalProfile";
+import Foto from "../component/image/images.jpg";
 
 const Profile = () => {
-  const [state] = useContext(UserContext)
+  const [state] = useContext(UserContext);
   let { data: profile, refetch } = useQuery("profileCache", async () => {
-    const response = await API.get("/user")
+    const response = await API.get("/user");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
   return (
     <>
@@ -58,7 +58,7 @@ const Profile = () => {
               className="mt-5 ms-4"
               style={{ width: "150px" }}
               onClick={() => {
-                setShow(true)
+                setShow(true);
               }}
             >
               Edit Profile
@@ -75,13 +75,13 @@ const Profile = () => {
       <ModalProfile
         show={show}
         hide={() => {
-          setShow(false)
+          setShow(false);
         }}
         setShow={setShow}
         refetch={refetch}
       />
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

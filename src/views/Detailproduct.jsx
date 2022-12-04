@@ -1,103 +1,94 @@
-import React, { useState, useContext } from "react"
-import { Container, Row, Col, Image, Button } from "react-bootstrap"
-import { useParams, useNavigate } from "react-router-dom"
-import { useMutation, useQuery } from "react-query"
-import { API } from "../config/api"
+import React, { useState, useContext } from "react";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import { useParams, useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+import { API } from "../config/api";
 
-import Checked from "../component/image/icons/green-check.svg"
-import { UserContext } from "../context/userContext"
+import Checked from "../component/image/icons/green-check.svg";
+import { UserContext } from "../context/userContext";
 // import Menu from "../data/images/product1.png"
 // import Toping from "../data/Toping"
 
 const Detailproduct = () => {
-  const { id } = useParams()
-  const [state] = useContext(UserContext)
-  console.log(state)
+  const { id } = useParams();
+  const [state] = useContext(UserContext);
+  console.log(state);
   // const [dataProduct, setDataProduct] = useState([])
   // const [dataTopping, setDataTopping] = useState([])
   const formatIDR = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,
-  })
+  });
 
   // console.log(state)
   // console.log(dataProduct)
   let { data: product } = useQuery("productsCache", async () => {
-    const response = await API.get("/product/" + id)
+    const response = await API.get("/product/" + id);
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
   let { data: toppings } = useQuery("toppingsCache", async () => {
-    const response = await API.get("/toppings")
+    const response = await API.get("/toppings");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
-  const [toppingCheck, setToppingCheck] = useState([0])
-  const [toppingPrice, setToppingPrice] = useState(0)
+  const [toppingCheck, setToppingCheck] = useState([0]);
+  const [toppingPrice, setToppingPrice] = useState(0);
 
   const handleChecked = (id, price) => {
-    let filterID = toppingCheck.filter((e) => e === id)
+    let filterID = toppingCheck.filter((e) => e === id);
     if (filterID[0] !== id) {
-      setToppingCheck([...toppingCheck, id])
-      setToppingPrice(toppingPrice + price)
+      setToppingCheck([...toppingCheck, id]);
+      setToppingPrice(toppingPrice + price);
     } else {
-      setToppingCheck(toppingCheck.filter((e) => e !== id))
-      setToppingPrice(toppingPrice - price)
+      setToppingCheck(toppingCheck.filter((e) => e !== id));
+      setToppingPrice(toppingPrice - price);
     }
-  }
+  };
 
-  console.log(toppingCheck)
+  console.log(toppingCheck);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleOnSubmit = useMutation(async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const config = {
       headers: { "Content-type": "application/json" },
-    }
+    };
 
     const data = {
       buyer_id: state.user.id,
       product_id: product.id,
       topping_id: toppingCheck,
-    }
+    };
 
     const datatrans = {
       user_id: state.user.id,
-    }
+    };
 
-    const bodytrans = JSON.stringify(datatrans)
-    const response = await API.get("/my-order")
-    console.log("ini data response", response)
-    console.log("ini data response status", response.data.data.status)
+    const bodytrans = JSON.stringify(datatrans);
+    const response = await API.get("/my-order");
+    console.log("ini data response", response);
+    console.log("ini data response status", response.data.data.status);
 
     // if (
     //   response?.data.data.status != "Waiting" &&
     //   response?.data.data.user_id == state.user.id
     // ) {
-    await API.post("/transaction", bodytrans)
-    console.log("ini data didalam if", response)
+    await API.post("/transaction", bodytrans);
+    console.log("ini data didalam if", response);
     // }
 
-    const body = JSON.stringify(data)
+    const body = JSON.stringify(data);
 
-    await API.post("/order", body, config)
+    await API.post("/order", body, config);
 
-    navigate("/my-cart")
-  })
-
-  // useEffect(() => {
-  //   if (product) {
-  //     setDataProduct(product)
-  //   }
-  //   if (toppings) {
-  //     setDataTopping(toppings)
-  //   }
-  // }, [product])
+    navigate("/my-cart");
+  });
 
   return (
     <>
@@ -166,7 +157,7 @@ const Detailproduct = () => {
                       {formatIDR.format(topping.price)}
                     </p>
                   </Col>
-                )
+                );
               })}
             </Row>
 
@@ -194,7 +185,7 @@ const Detailproduct = () => {
         </Row>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Detailproduct
+export default Detailproduct;

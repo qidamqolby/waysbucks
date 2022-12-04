@@ -1,24 +1,23 @@
-import React, { useState } from "react"
-import { Container, Table, Button } from "react-bootstrap"
-import { useQuery } from "react-query"
-import { API } from "../config/api"
-import PopDelete from "../component/modal/Delete"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { Container, Table, Button } from "react-bootstrap";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import PopDelete from "../component/modal/Delete";
+import { useNavigate } from "react-router-dom";
 
 const ListTopping = () => {
-  // const [pop, setpop] = useState(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   let { data: toppings, refetch } = useQuery("toppingssCache", async () => {
-    const response = await API.get("/toppings")
+    const response = await API.get("/toppings");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
   let handleDelete = async (id) => {
-    await API.delete(`/topping/` + id)
-    refetch()
-  }
+    await API.delete(`/topping/` + id);
+    refetch();
+  };
 
   return (
     <>
@@ -62,7 +61,7 @@ const ListTopping = () => {
                       style={{ paddingLeft: "35px", paddingRight: "35px" }}
                       onClick={() => {
                         if (window.confirm("Delete the item?")) {
-                          handleDelete(e.id)
+                          handleDelete(e.id);
                         }
                       }}
                     >
@@ -70,14 +69,14 @@ const ListTopping = () => {
                     </Button>
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </Table>
         <PopDelete />
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default ListTopping
+export default ListTopping;

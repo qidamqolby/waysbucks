@@ -1,24 +1,23 @@
-import React, { useState } from "react"
-import { Container, Table, Button } from "react-bootstrap"
-import { useQuery } from "react-query"
-import { API } from "../config/api"
-import PopDelete from "../component/modal/Delete"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { Container, Table, Button } from "react-bootstrap";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import PopDelete from "../component/modal/Delete";
+import { useNavigate } from "react-router-dom";
 
 const ListProduct = () => {
-  // const [pop, setpop] = useState(false)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   let { data: products, refetch } = useQuery("productssCache", async () => {
-    const response = await API.get("/products")
+    const response = await API.get("/products");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
   let handleDelete = async (id) => {
-    await API.delete(`/product/` + id)
-    refetch()
-  }
+    await API.delete(`/product/` + id);
+    refetch();
+  };
 
   return (
     <>
@@ -62,7 +61,7 @@ const ListProduct = () => {
                       style={{ paddingLeft: "35px", paddingRight: "35px" }}
                       onClick={() => {
                         if (window.confirm("Delete the item?")) {
-                          handleDelete(e.id)
+                          handleDelete(e.id);
                         }
                       }}
                     >
@@ -70,14 +69,14 @@ const ListProduct = () => {
                     </Button>
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </Table>
         <PopDelete />
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default ListProduct
+export default ListProduct;

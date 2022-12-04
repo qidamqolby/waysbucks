@@ -1,7 +1,7 @@
-import React from "react"
-import JumbotronIcon from "./image/jumbotron.png"
-import Rec2 from "./image/Rec2.png"
-import { Container, Card } from "react-bootstrap"
+import React from "react";
+import JumbotronIcon from "./image/jumbotron.png";
+import Rec2 from "./image/Rec2.png";
+import { Container, Card } from "react-bootstrap";
 
 const Jumbotron = () => {
   return (
@@ -38,7 +38,7 @@ const Jumbotron = () => {
         </Card>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Jumbotron
+export default Jumbotron;

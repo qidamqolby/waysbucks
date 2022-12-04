@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -7,51 +7,51 @@ import {
   Stack,
   Button,
   Image,
-} from "react-bootstrap"
-import { API } from "../config/api"
-import AttachIcon from "../component/image/Frame.png"
-import { useMutation } from "react-query"
+} from "react-bootstrap";
+import { API } from "../config/api";
+import AttachIcon from "../component/image/Frame.png";
+import { useMutation } from "react-query";
 
 const AddToping = () => {
-  const [preview, setPreview] = useState(null)
+  const [preview, setPreview] = useState(null);
 
   const [topping, setTopping] = useState({
     title: "",
     price: "",
     image: "",
     qty: "",
-  })
+  });
 
   const handleChange = (e) => {
     setTopping({
       ...topping,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
-    })
+    });
 
     // Create image url for preview
     if (e.target.type === "file") {
-      let url = URL.createObjectURL(e.target.files[0])
-      setPreview(url)
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreview(url);
     }
-  }
+  };
 
   const handleOnSubmit = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
 
-      const formData = new FormData()
-      formData.set("image", topping.image[0])
-      formData.set("title", topping.title)
-      formData.set("price", topping.price)
-      formData.set("qty", topping.qty)
+      const formData = new FormData();
+      formData.set("image", topping.image[0]);
+      formData.set("title", topping.title);
+      formData.set("price", topping.price);
+      formData.set("qty", topping.qty);
 
-      const response = await API.post("/topping", formData)
-      console.log("data topping berhasil ditambahankan", response.data.data)
+      const response = await API.post("/topping", formData);
+      console.log("data topping berhasil ditambahankan", response.data.data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  })
+  });
   return (
     <>
       <Container className="mt-5 mb-5">
@@ -147,7 +147,7 @@ const AddToping = () => {
         </Row>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default AddToping
+export default AddToping;

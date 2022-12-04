@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext, useEffect } from "react";
 import {
   Navbar,
   Container,
@@ -7,52 +7,44 @@ import {
   Stack,
   Image,
   Badge,
-} from "react-bootstrap"
-import Group from "./image/navbar/Group.png"
-import Register from "./auth/Register"
-import { UserContext } from "../context/userContext"
-import Login from "./auth/Login"
-import DropdownUser from "./dropdown/DropdownUser"
-import { useNavigate, Link } from "react-router-dom"
-import DropdownAdmin from "./dropdown/DropdownAdmin"
-import { useQuery } from "react-query"
-import { API } from "../config/api"
-import BasketIcon from "./image/navbar/basketIcon.png"
+} from "react-bootstrap";
+import Group from "./image/navbar/Group.png";
+import Register from "./auth/Register";
+import { UserContext } from "../context/userContext";
+import Login from "./auth/Login";
+import DropdownUser from "./dropdown/DropdownUser";
+import { useNavigate, Link } from "react-router-dom";
+import DropdownAdmin from "./dropdown/DropdownAdmin";
+import { useQuery } from "react-query";
+import { API } from "../config/api";
+import BasketIcon from "./image/navbar/basketIcon.png";
 
 const Header = () => {
-  const [state, dispatch] = useContext(UserContext)
-  const [showRegister, setShowRegister] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
-  const Navigate = useNavigate()
+  const [state, dispatch] = useContext(UserContext);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const Navigate = useNavigate();
 
-  // const [pop, setPop] = useState([])
-  // useEffect(() => {
-  //   API.get("/orders-id")
-  //     .then((res) => {
-  //       setPop(res.data.data)
-  //     })
-  //     .catch((err) => console.log("error", err))
-  // }, [])
-  console.log(state)
+  console.log(state);
   const { data: order, refetch } = useQuery("ordersCache", async () => {
     if (state.isLogin === true) {
-      const response = await API.get("/orders-id")
-      return response.data.data
+      const response = await API.get("/orders-id");
+      return response.data.data;
     }
-  })
+  });
 
-  let Qty = 0
+  let Qty = 0;
 
   order?.map((e) => {
-    Qty += e.qty
-  })
+    Qty += e.qty;
+  });
   const Logout = () => {
     dispatch({
       type: "LOGOUT",
-    })
-    refetch()
-    Navigate("/")
-  }
+    });
+    refetch();
+    Navigate("/");
+  };
   // useEffect(() => {
   //   refetch()
   // }, [order])
@@ -96,7 +88,7 @@ const Header = () => {
                 variant="outline-danger"
                 className="px-3"
                 onClick={() => {
-                  setShowRegister(true)
+                  setShowRegister(true);
                 }}
               >
                 Register
@@ -112,7 +104,7 @@ const Header = () => {
                 className="px-4"
                 style={{ backgroundColor: "red" }}
                 onClick={() => {
-                  setShowLogin(true)
+                  setShowLogin(true);
                 }}
               >
                 Login
@@ -121,7 +113,7 @@ const Header = () => {
               <Login
                 show={showLogin}
                 hide={() => {
-                  setShowLogin(false)
+                  setShowLogin(false);
                 }}
                 setShowLogin={setShowLogin}
                 setShowRegister={setShowRegister}
@@ -131,7 +123,7 @@ const Header = () => {
         </Stack>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

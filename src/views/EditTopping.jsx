@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -7,63 +7,63 @@ import {
   Stack,
   Button,
   Image,
-} from "react-bootstrap"
-import { API } from "../config/api"
-import AttachIcon from "../component/image/Frame.png"
-import { useMutation } from "react-query"
-import PopSuccess from "../component/modal/PopUpToping"
-import { useNavigate, useParams } from "react-router-dom"
+} from "react-bootstrap";
+import { API } from "../config/api";
+import AttachIcon from "../component/image/Frame.png";
+import { useMutation } from "react-query";
+import PopSuccess from "../component/modal/PopUpToping";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditTopping = () => {
-  const { id } = useParams()
-  const [preview, setPreview] = useState(null)
+  const { id } = useParams();
+  const [preview, setPreview] = useState(null);
 
-  const [showPop, setShowPop] = useState(false)
+  const [showPop, setShowPop] = useState(false);
 
   const [topping, setTopping] = useState({
     title: "",
     price: "",
     image: "",
     qty: "",
-  })
+  });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setTopping({
       ...topping,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
-    })
+    });
 
     // Create image url for preview
     if (e.target.type === "file") {
-      let url = URL.createObjectURL(e.target.files[0])
-      setPreview(url)
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreview(url);
     }
-  }
+  };
 
   const handleOnSubmit = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
 
       const config = {
         headers: {
           "Content-type": "multipart/form-data",
         },
-      }
+      };
 
-      const formData = new FormData()
-      formData.set("image", topping.image[0])
-      formData.set("title", topping.title)
-      formData.set("price", topping.price)
-      formData.set("qty", topping.qty)
+      const formData = new FormData();
+      formData.set("image", topping.image[0]);
+      formData.set("title", topping.title);
+      formData.set("price", topping.price);
+      formData.set("qty", topping.qty);
 
-      const res = await API.patch("/topping/" + id, formData, config)
-      navigate("/list-topping")
+      const res = await API.patch("/topping/" + id, formData, config);
+      navigate("/list-topping");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  })
+  });
 
   return (
     <>
@@ -152,7 +152,7 @@ const EditTopping = () => {
               <PopSuccess
                 show={showPop}
                 hide={() => {
-                  setShowPop(false)
+                  setShowPop(false);
                 }}
               />
             </Form>
@@ -165,7 +165,7 @@ const EditTopping = () => {
         </Row>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default EditTopping
+export default EditTopping;

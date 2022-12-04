@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { Form, Modal, Button } from "react-bootstrap"
-import { useMutation } from "react-query"
-import { API } from "../../config/api"
+import React, { useState } from "react";
+import { Form, Modal, Button } from "react-bootstrap";
+import { useMutation } from "react-query";
+import { API } from "../../config/api";
 
 const ModalProfile = ({ show, setShow, hide, refetch }) => {
   const [form, setForm] = useState({
@@ -10,41 +10,41 @@ const ModalProfile = ({ show, setShow, hide, refetch }) => {
     image: "",
     address: "",
     phone: "",
-  })
+  });
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
 
       const config = {
         headers: {
           "Content-type": "multipart/form-data",
         },
-      }
+      };
 
-      const formData = new FormData()
-      formData.set("fullname", form.fullname)
-      formData.set("password", form.password)
-      formData.set("image", form.image[0])
-      formData.set("address", form.address)
-      formData.set("phone", form.phone)
+      const formData = new FormData();
+      formData.set("fullname", form.fullname);
+      formData.set("password", form.password);
+      formData.set("image", form.image[0]);
+      formData.set("address", form.address);
+      formData.set("phone", form.phone);
 
-      await API.patch("/user-update", formData, config)
-      refetch()
+      await API.patch("/user-update", formData, config);
+      refetch();
 
-      setShow(false)
+      setShow(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  })
+  });
   return (
     <>
       <Modal show={show} onHide={hide} centered>
@@ -140,7 +140,7 @@ const ModalProfile = ({ show, setShow, hide, refetch }) => {
         </Modal.Body>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default ModalProfile
+export default ModalProfile;

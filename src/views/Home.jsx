@@ -1,7 +1,7 @@
-import React from "react"
-import Jumbotron from "../component/Jumbotron"
-import Listproducts from "../component/Listproducts"
-import Header from "../component/Header"
+import React from "react";
+import Jumbotron from "../component/Jumbotron";
+import Listproducts from "../component/Listproducts";
+import Header from "../component/Header";
 
 const Home = () => {
   return (
@@ -9,7 +9,7 @@ const Home = () => {
       <Jumbotron />
       <Listproducts />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

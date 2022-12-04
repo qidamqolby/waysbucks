@@ -1,28 +1,28 @@
-import React, { useState, useRef } from "react"
-import { Nav, Stack, Button, Image, Overlay, Popover } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import AddProduct from "../image/navbar/add-product.png"
-import AddToping from "../image/navbar/add-toping.png"
-import LogoutIcon from "../image/navbar/logout.png"
-import Foto from "../image/images.jpg"
-import { API } from "../../config/api"
-import { useQuery } from "react-query"
+import React, { useState, useRef } from "react";
+import { Nav, Stack, Button, Image, Overlay, Popover } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import AddProduct from "../image/navbar/add-product.png";
+import AddToping from "../image/navbar/add-toping.png";
+import LogoutIcon from "../image/navbar/logout.png";
+import Foto from "../image/images.jpg";
+import { API } from "../../config/api";
+import { useQuery } from "react-query";
 
 const DropdownAdmin = ({ Logout }) => {
-  const [show, setShow] = useState(false)
-  const [target, setTarget] = useState(null)
-  const ref = useRef(null)
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
 
   const handleClick = (event) => {
-    setShow(!show)
-    setTarget(event.target)
-  }
+    setShow(!show);
+    setTarget(event.target);
+  };
 
   let { data: profile, refetch } = useQuery("profileCache", async () => {
-    const response = await API.get("/user")
+    const response = await API.get("/user");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
   return (
     <>
       <Nav className="d-flex flex-row justify-content-end">
@@ -32,7 +32,6 @@ const DropdownAdmin = ({ Logout }) => {
           className="d-flex flex-row justify-content-end"
         >
           {/* <Cart /> */}
-
           <div ref={ref}>
             <Button
               onClick={handleClick}
@@ -154,7 +153,7 @@ const DropdownAdmin = ({ Logout }) => {
         </Stack>
       </Nav>
     </>
-  )
-}
+  );
+};
 
-export default DropdownAdmin
+export default DropdownAdmin;

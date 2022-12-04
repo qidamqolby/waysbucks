@@ -1,43 +1,33 @@
-import React, { useState, useContext } from "react"
-import { Button, Form, Modal, Card } from "react-bootstrap"
-// import { useNavigate } from "react-router-dom"
-import { UserContext } from "../../context/userContext"
-import { API } from "../../config/api"
+import React, { useState, useContext } from "react";
+import { Button, Form, Modal, Card } from "react-bootstrap";
+import { UserContext } from "../../context/userContext";
+import { API } from "../../config/api";
 
 const Login = ({ show, hide, setShowLogin, setShowRegister }) => {
-  // let navigate = useNavigate()
-
-  const [state, dispatch] = useContext(UserContext)
+  const [state, dispatch] = useContext(UserContext);
 
   const [form, setForm] = useState({
     email: "",
     password: "",
-  })
-
-  // useEffect(() => {
-
-  //   return (
-
-  //   )
-  // }, [])
+  });
 
   const handleOnSubmit = async (e) => {
     try {
-      e.preventDefault()
-      const response = await API.post("/login", form)
+      e.preventDefault();
+      const response = await API.post("/login", form);
 
-      console.log("login", response)
+      console.log("login", response);
 
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: response.data.data,
-      })
-      console.log("state", state)
-      console.log("data berhasil ditambahkan", response.data.data)
+      });
+      console.log("state", state);
+      console.log("data berhasil ditambahkan", response.data.data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <Modal show={show} onHide={hide} onSubmit={hide} centered>
@@ -82,8 +72,8 @@ const Login = ({ show, hide, setShowLogin, setShowRegister }) => {
                 style={{ cursor: "pointer" }}
                 className="ms-1 fw-bold"
                 onClick={() => {
-                  setShowLogin(false)
-                  setShowRegister(true)
+                  setShowLogin(false);
+                  setShowRegister(true);
                 }}
               >
                 Here
@@ -93,7 +83,7 @@ const Login = ({ show, hide, setShowLogin, setShowRegister }) => {
         </Form>
       </Card>
     </Modal>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

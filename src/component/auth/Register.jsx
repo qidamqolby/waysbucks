@@ -1,28 +1,27 @@
-import React, { useState, useContext } from "react"
-import { Button, Card, Form, Modal } from "react-bootstrap"
-import { useMutation } from "react-query"
-import { API } from "../../config/api"
+import React, { useState, useContext } from "react";
+import { Button, Card, Form, Modal } from "react-bootstrap";
+import { useMutation } from "react-query";
+import { API } from "../../config/api";
 
 const Register = ({ show, hide, setShowRegister, setShowLogin }) => {
   const [form, setForm] = useState({
     fullname: "",
     email: "",
     password: "",
-  })
-
+  });
 
   const handleOnSubmit = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
 
-      const response = await API.post("/register", form)
-      console.log("Berhasil Register Akun", response.data.data)
-      setShowRegister(false)
-      setShowLogin(true)
+      const response = await API.post("/register", form);
+      console.log("Berhasil Register Akun", response.data.data);
+      setShowRegister(false);
+      setShowLogin(true);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  })
+  });
 
   return (
     <Modal show={show} onHide={hide} onSubmit={hide} centered>
@@ -74,8 +73,8 @@ const Register = ({ show, hide, setShowRegister, setShowLogin }) => {
                 style={{ cursor: "pointer" }}
                 className="ms-1 fw-bold"
                 onClick={() => {
-                  setShowRegister(false)
-                  setShowLogin(true)
+                  setShowRegister(false);
+                  setShowLogin(true);
                 }}
               >
                 Here
@@ -85,7 +84,7 @@ const Register = ({ show, hide, setShowRegister, setShowLogin }) => {
         </Form>
       </Card>
     </Modal>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

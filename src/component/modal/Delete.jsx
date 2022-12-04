@@ -1,9 +1,9 @@
-import { Modal, Button } from "react-bootstrap"
+import { Modal, Button } from "react-bootstrap";
 
 export default function DeleteData({ show, handleClose, setConfirmDelete }) {
   const handleDelete = () => {
-    setConfirmDelete(true)
-  }
+    setConfirmDelete(true);
+  };
 
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -32,5 +32,5 @@ export default function DeleteData({ show, handleClose, setConfirmDelete }) {
         </div>
       </Modal.Body>
     </Modal>
-  )
+  );
 }

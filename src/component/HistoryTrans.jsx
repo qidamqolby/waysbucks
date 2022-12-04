@@ -1,24 +1,24 @@
-import React from "react"
-import { Stack, Image } from "react-bootstrap"
-import { API } from "../config/api"
-import Logo from "./image/navbar/Group.png"
-import Qrcode from "./image/barcode.png"
-import { useQuery } from "react-query"
+import React from "react";
+import { Stack, Image } from "react-bootstrap";
+import { API } from "../config/api";
+import Logo from "./image/navbar/Group.png";
+import Qrcode from "./image/barcode.png";
+import { useQuery } from "react-query";
 
 const Transaction = () => {
   const formatIDR = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0,
-  })
+  });
 
   let { data: transUser, refetch } = useQuery("transUserCache", async () => {
-    const response = await API.get("/transaction-user")
+    const response = await API.get("/transaction-user");
 
-    return response.data.data
-  })
+    return response.data.data;
+  });
 
-  console.log("ini data transUser", transUser)
+  console.log("ini data transUser", transUser);
   return (
     <>
       {transUser?.map((item, index) => (
@@ -98,7 +98,7 @@ const Transaction = () => {
         </div>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default Transaction
+export default Transaction;

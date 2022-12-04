@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -7,56 +7,56 @@ import {
   Stack,
   Button,
   Image,
-} from "react-bootstrap"
-import { API } from "../config/api"
-import AttachIcon from "../component/image/Frame.png"
-import { useMutation } from "react-query"
-import PopSuccess from "../component/modal/PopUpProduct"
-import { useNavigate } from "react-router-dom"
+} from "react-bootstrap";
+import { API } from "../config/api";
+import AttachIcon from "../component/image/Frame.png";
+import { useMutation } from "react-query";
+import PopSuccess from "../component/modal/PopUpProduct";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
-  const [preview, setPreview] = useState(null)
+  const [preview, setPreview] = useState(null);
 
-  const [showPop, setShowPop] = useState(false)
+  const [showPop, setShowPop] = useState(false);
 
   const [product, setProduct] = useState({
     title: "",
     price: "",
     image: "",
     qty: "",
-  })
+  });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setProduct({
       ...product,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
-    })
+    });
 
     // Create image url for preview
     if (e.target.type === "file") {
-      let url = URL.createObjectURL(e.target.files[0])
-      setPreview(url)
+      let url = URL.createObjectURL(e.target.files[0]);
+      setPreview(url);
     }
-  }
+  };
 
   const handleOnSubmit = useMutation(async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
 
-      const formData = new FormData()
-      formData.set("image", product.image[0])
-      formData.set("title", product.title)
-      formData.set("price", product.price)
-      formData.set("qty", product.qty)
+      const formData = new FormData();
+      formData.set("image", product.image[0]);
+      formData.set("title", product.title);
+      formData.set("price", product.price);
+      formData.set("qty", product.qty);
 
-      const response = await API.post("/product", formData)
-      setShowPop(true)
+      const response = await API.post("/product", formData);
+      setShowPop(true);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  })
+  });
 
   return (
     <>
@@ -145,7 +145,7 @@ const AddProduct = () => {
               <PopSuccess
                 show={showPop}
                 hide={() => {
-                  setShowPop(false)
+                  setShowPop(false);
                 }}
               />
             </Form>
@@ -158,7 +158,7 @@ const AddProduct = () => {
         </Row>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default AddProduct
+export default AddProduct;

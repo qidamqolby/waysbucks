@@ -38,7 +38,7 @@ const Profile = () => {
                 className="rounded-3"
                 style={{
                   width: "200px",
-                  height: "320px",
+                  height: "200px",
                   objectFit: "cover",
                 }}
               />

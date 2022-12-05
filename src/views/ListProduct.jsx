@@ -25,7 +25,7 @@ const ListProduct = () => {
         <h1 style={{ color: "#BD0707" }} className="my-5">
           List Product
         </h1>
-        <Table striped bordered hover variant="dark">
+        <Table striped bordered hover variant="light">
           <thead>
             <tr>
               <th>ID</th>

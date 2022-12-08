@@ -1,8 +1,6 @@
 # Waysbucks
 
-This project created for learning Frontend Development using ReactJS, based on task Dumbways Fullstack Batch 41 Stage 2
-
-for backend of this project <a href ="https://github.com/qidamqolby/qidamqolby_waybucks_api">Backend Waysbucks</a>
+This project created for learning FullStack Development using ReactJS, based on task Dumbways Fullstack Batch 41 Stage 2
 
 ## Authors
 

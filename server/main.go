@@ -15,10 +15,10 @@ import (
 
 func main() {
 
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		panic("Failed to load env file")
-	}
+// 	errEnv := godotenv.Load()
+// 	if errEnv != nil {
+// 		panic("Failed to load env file")
+// 	}
 
 	// initial DB
 	mysql.DatabaseInit()
